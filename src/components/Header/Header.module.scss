@@ -1,0 +1,14 @@
+.headerWrapper {
+    display: flex;
+    flex-direction: row;
+
+    div {
+        flex: 1;
+    }
+
+    h4 {
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}
