@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import cx from 'classnames';
 
 import config from 'config';
 
@@ -38,7 +39,7 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, showCommentsButton
     if (error || !storyData?.title) return <Error>{error}</Error>;
 
     return (
-        <div className={styles.content}>
+        <div className={cx(styles.content, className)}>
             <div className={styles.title}>
                 {storyData.url ? (
                     <a href={storyData.url} target="_blank" rel="noopener noreferrer">

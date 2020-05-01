@@ -5,6 +5,7 @@ import axios from 'axios';
 import ArticleBlock from 'components/Story/ArticleBlock/ArticleBlock';
 import CommentBlock from 'components/Story/CommentBlock/CommentBlock';
 import Error from 'components/Error/Error';
+import Loader from 'components/Loader/Loader';
 import config from 'config';
 
 import styles from './Comments.module.scss';
@@ -13,17 +14,18 @@ const Comments: React.FC = () => {
     const { storyId } = useParams();
     const [commentIds, setCommentIds] = useState<null | number[]>();
     const [error, setError] = useState<null | string>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const fetchStoryIds = useCallback((): void => {
-        if (error) setError(null); // if error exists, clear it before calling the API
-
+        setLoading(true);
         axios
             .get(`${config.API_BASE}/item/${storyId}.json`)
             .then((res) => {
                 setCommentIds(res.data.kids);
             })
-            .catch((err) => setError(err.message));
-    }, [error, storyId]);
+            .catch((err) => setError(err.message))
+            .finally(() => setLoading(false));
+    }, [storyId]);
 
     const renderComments = useMemo((): React.ReactNode => {
         if (!commentIds) return null;
@@ -34,14 +36,20 @@ const Comments: React.FC = () => {
         fetchStoryIds();
     }, [fetchStoryIds]);
 
+    if (loading) {
+        return <Loader />;
+    }
+
+    if (!commentIds || !storyId) return null;
+
     if (error) {
         return <Error>{error}</Error>;
     }
 
     return (
         <div>
-            <ArticleBlock storyId={storyId} showCommentsButton={false} />
-            <h4>Comments</h4>
+            <ArticleBlock storyId={storyId} className={styles.articleBlock} showCommentsButton={false} />
+            <div className={styles.title}>Comments</div>
             {renderComments}
         </div>
     );
