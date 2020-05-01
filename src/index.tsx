@@ -1,11 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './index.css';
+
 import Site from 'views/Site/Site';
 
+import './index.scss';
+import './variables.scss';
+
 render(
-  <React.StrictMode>
-    <Site />
-  </React.StrictMode>,
-  document.getElementById('app')
+    <React.StrictMode>
+        <Site />
+    </React.StrictMode>,
+    document.getElementById('app'),
 );

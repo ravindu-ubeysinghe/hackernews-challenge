@@ -1,14 +1,14 @@
-.headerWrapper {
-    display: flex;
-    flex-direction: row;
+.wrapper {
+    background-color: var(--headerBlack);
+    height: var(--headerHeight);
+}
 
-    div {
-        flex: 1;
-    }
-
+.content {
+    padding-top: var(--spacing-large);
+    padding-bottom: var(--spacing-large);
     h4 {
-        text-transform: uppercase;
+        color: var(--white);
         font-weight: 600;
-        text-decoration: underline;
     }
 }
+
