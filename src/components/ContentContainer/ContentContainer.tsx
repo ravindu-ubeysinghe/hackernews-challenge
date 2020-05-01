@@ -13,8 +13,8 @@ const ContentContainer: React.FC<ContentContainerProps> = ({ children, isFullWid
     }
 
     return (
-        <div className={cx('container', className)}>
-            <div className="row">{children}</div>
+        <div className="container">
+            <div className={cx('row', className)}>{children}</div>
         </div>
     );
 };
