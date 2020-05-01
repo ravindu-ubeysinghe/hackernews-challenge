@@ -11,18 +11,18 @@ const News: React.FC = () => {
 
     const fetchNewsIds = useCallback((): void => {
         if (error) setError(null); // if error exists, clear it before calling the API
+
         axios
             .get(`${config.API_BASE}/topstories.json`)
             .then((res) => {
                 setNewsIds(res.data);
             })
             .catch((err) => setError(err.message || config.DEFAULT_ERROR_MESSAGE));
-        console.log('fetching');
     }, [error]);
 
     const renderAricles = useMemo((): React.ReactNode => {
         if (!newsIds) return null;
-        return newsIds.slice(0, 10).map((newsId) => <Article key={newsId} newsItemId={newsId} />);
+        return newsIds.slice(0, config.MAX_NEWS_ITEMS).map((newsId) => <Article key={newsId} newsItemId={newsId} />);
     }, [newsIds]);
 
     useEffect(() => {

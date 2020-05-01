@@ -4,6 +4,7 @@ import axios from 'axios';
 import config from 'config';
 
 import NewsItem from '../types/newsItem';
+import { getTimeDifference } from '../utils/datetime';
 import styles from './Article.module.scss';
 
 interface ArticleProps {
@@ -22,8 +23,7 @@ const Article: React.FC<ArticleProps> = ({ newsItemId = '' }) => {
                 setNewsData(res.data);
             })
             .catch((err) => setError(err.message || config.DEFAULT_ERROR_MESSAGE));
-        console.log('fetching news data');
-    }, [error]);
+    }, [error, newsItemId]);
 
     useEffect(() => {
         fetchNewsItem();
@@ -33,10 +33,19 @@ const Article: React.FC<ArticleProps> = ({ newsItemId = '' }) => {
 
     return (
         <div className={styles.content}>
-            <div>{newsData.title}</div>
+            <div>
+                {newsData.url ? (
+                    <a href={newsData.url} target="_blank" rel="noopener noreferrer">
+                        {newsData.title}
+                    </a>
+                ) : (
+                    newsData.title
+                )}
+            </div>
             <div className={styles.meta}>
                 {newsData.score && <div>Score: {newsData.score}</div>}
                 {newsData.by && <div>By: {newsData.by}</div>}
+                {newsData.time && <div>Time posted: {getTimeDifference(newsData.time)}</div>}
             </div>
         </div>
     );
