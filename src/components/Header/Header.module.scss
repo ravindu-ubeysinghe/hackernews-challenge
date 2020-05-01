@@ -5,15 +5,21 @@
 
 .content {
     padding: var(--spacing-large) 0;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     h4 {
         color: var(--white);
         font-weight: var(--mediumBold);
     }
 
-    @media(min-width: 768px) {
+    @media(min-width: 481px) {
         padding-left: var(--spacing-large);
         padding-right: var(--spacing-large);
+        justify-content: left;
     }
 }
 

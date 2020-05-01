@@ -6,14 +6,12 @@ import styles from './Footer.module.scss';
 
 const Footer: React.FC = () => (
     <ContentContainer isFullWidth className={styles.wrapper} dataTestId="footer">
-        <ContentContainer className={styles.content}>
-            <small>
-                Created by{' '}
-                <a href="https://ravindu.com.au" target="_blank" rel="noopener noreferrer">
-                    Ravindu Ubeysinghe
-                </a>
-            </small>
-        </ContentContainer>
+        <small>
+            Created by{' '}
+            <a href="https://ravindu.com.au" target="_blank" rel="noopener noreferrer">
+                Ravindu Ubeysinghe
+            </a>
+        </small>
     </ContentContainer>
 );
 
