@@ -1,10 +1,13 @@
 .content {
     display: block;
-    padding: var(--spacing) 0;
-    border-bottom: 1px solid var(--footerGrey);
+    padding: var(--spacing) var(--spacing-large);
+    border-radius: 10px;
+    background-color: var(--articleBlobGrey);
+    margin-bottom: var(--spacing-large);
 
     &:last-child {
         border-bottom: 0;
+        margin-bottom: 0;
     }
 }
 

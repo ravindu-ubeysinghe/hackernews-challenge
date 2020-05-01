@@ -8,15 +8,7 @@ interface ContentContainerProps {
 }
 
 const ContentContainer: React.FC<ContentContainerProps> = ({ children, isFullWidth = false, className = '' }) => {
-    if (isFullWidth) {
-        return <div className={cx('container-fluid', className)}>{children}</div>;
-    }
-
-    return (
-        <div className="container">
-            <div className={cx('row', className)}>{children}</div>
-        </div>
-    );
+    return <div className={cx(isFullWidth ? 'container-fluid' : 'container', className)}>{children}</div>;
 };
 
 export default ContentContainer;

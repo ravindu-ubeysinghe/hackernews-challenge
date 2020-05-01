@@ -5,9 +5,15 @@
 
 .content {
     padding: var(--spacing-large) 0;
+
     h4 {
         color: var(--white);
         font-weight: 600;
+    }
+
+    @media(min-width: 768px) {
+        padding-left: var(--spacing-large);
+        padding-right: var(--spacing-large);
     }
 }
 
