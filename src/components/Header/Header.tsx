@@ -6,9 +6,9 @@ import ContentContainer from 'components/ContentContainer/ContentContainer';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => (
-    <ContentContainer isFullWidth className={styles.wrapper}>
+    <ContentContainer isFullWidth className={styles.wrapper} dataTestId="header">
         <ContentContainer className={styles.content}>
-            <Link to="/">
+            <Link to="/" data-testid="header-logo">
                 <h4>HackerStory</h4>
             </Link>
         </ContentContainer>

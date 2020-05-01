@@ -34,15 +34,16 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, showCommentsButton
         fetchStoryItem();
     }, [fetchStoryItem]);
 
-    if (!storyData) return null;
+    console.log(storyId);
+    if (!storyData || !storyId) return null;
 
     if (error || !storyData?.title) return <Error>{error}</Error>;
 
     return (
-        <div className={cx(styles.content, className)}>
-            <div className={styles.title}>
+        <div className={cx(styles.content, className)} data-testid="article">
+            <div className={styles.title} data-testid="article-title">
                 {storyData.url ? (
-                    <a href={storyData.url} target="_blank" rel="noopener noreferrer">
+                    <a href={storyData.url} target="_blank" rel="noopener noreferrer" data-testid="article-link">
                         {storyData.title}
                     </a>
                 ) : (
@@ -57,7 +58,7 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, showCommentsButton
                 </div>
             </div>
             {showCommentsButton && storyData.kids && storyData.kids.length > 1 && (
-                <Link to={`/comments/${storyId}`}>
+                <Link to={`/comments/${storyId}`} data-testid="article-see-comments">
                     <div className={styles.comments}>See comments</div>
                 </Link>
             )}

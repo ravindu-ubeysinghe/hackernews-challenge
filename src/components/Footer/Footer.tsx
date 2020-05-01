@@ -5,7 +5,7 @@ import ContentContainer from 'components/ContentContainer/ContentContainer';
 import styles from './Footer.module.scss';
 
 const Footer: React.FC = () => (
-    <ContentContainer isFullWidth className={styles.wrapper}>
+    <ContentContainer isFullWidth className={styles.wrapper} dataTestId="footer">
         <ContentContainer className={styles.content}>
             <small>
                 Created by{' '}

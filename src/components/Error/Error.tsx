@@ -11,7 +11,9 @@ interface ErrorProps {
 }
 
 const Error: React.FC<ErrorProps> = ({ children, className }) => (
-    <div className={cx(styles.content, 'alert alert-danger', { className })}>{children || config.DEFAULT_ERROR_MESSAGE}</div>
+    <div data-testid="error" className={cx(styles.content, 'alert alert-danger', { className })}>
+        {children || config.DEFAULT_ERROR_MESSAGE}
+    </div>
 );
 
 export default Error;
