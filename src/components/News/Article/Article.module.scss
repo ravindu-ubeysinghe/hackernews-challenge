@@ -1,5 +1,18 @@
 .content {
     display: block;
+    padding: var(--spacing) 0;
+    border-bottom: 1px solid var(--footerGrey);
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.title {
+    color: var(--black);
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .meta {
@@ -8,6 +21,15 @@
     
     div {
         font-size: small;
+    }
+
+    .score {
+        max-width: 100px;
+        margin-right: var(--spacing);
+    }
+
+    .author {
         flex: 1;
+        margin-left: var(--spacing);
     }
 }

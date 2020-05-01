@@ -1,6 +1,9 @@
 .wrapper {
     background-color: var(--footerGrey);
-    padding-top: var(--spacing-large);
-    padding-bottom: var(--spacing-large);
+    padding: var(--spacing-large) 0;
     height: var(--footerHeight);
+
+    a {
+        font-weight: bold;
+    }
 }

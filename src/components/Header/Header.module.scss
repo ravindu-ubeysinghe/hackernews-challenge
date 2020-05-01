@@ -4,8 +4,7 @@
 }
 
 .content {
-    padding-top: var(--spacing-large);
-    padding-bottom: var(--spacing-large);
+    padding: var(--spacing-large) 0;
     h4 {
         color: var(--white);
         font-weight: 600;

@@ -2,8 +2,10 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import axios from 'axios';
 
 import Article from 'components/News/Article/Article';
-
+import Error from 'components/Error/Error';
 import config from 'config';
+
+import styles from './News.module.scss';
 
 const News: React.FC = () => {
     const [newsIds, setNewsIds] = useState<null | string[]>(null);
@@ -17,7 +19,7 @@ const News: React.FC = () => {
             .then((res) => {
                 setNewsIds(res.data);
             })
-            .catch((err) => setError(err.message || config.DEFAULT_ERROR_MESSAGE));
+            .catch((err) => setError(err.message));
     }, [error]);
 
     const renderAricles = useMemo((): React.ReactNode => {
@@ -30,10 +32,10 @@ const News: React.FC = () => {
     }, [fetchNewsIds]);
 
     if (error) {
-        return <div>{error}</div>;
+        return <Error>{error}</Error>;
     }
 
-    return <div>{renderAricles}</div>;
+    return <div className={styles.content}>{renderAricles}</div>;
 };
 
 export default News;

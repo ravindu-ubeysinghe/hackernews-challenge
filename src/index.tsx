@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 
 import Site from 'views/Site/Site';
 
-import './index.scss';
 import './variables.scss';
+import './index.scss';
 
 render(
     <React.StrictMode>

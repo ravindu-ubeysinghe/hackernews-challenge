@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import config from 'config';
 
+import Error from 'components/Error/Error';
 import NewsItem from '../types/newsItem';
 import { getTimeDifference } from '../utils/datetime';
 import styles from './Article.module.scss';
@@ -22,18 +23,18 @@ const Article: React.FC<ArticleProps> = ({ newsItemId = '' }) => {
             .then((res) => {
                 setNewsData(res.data);
             })
-            .catch((err) => setError(err.message || config.DEFAULT_ERROR_MESSAGE));
+            .catch((err) => setError(err.message));
     }, [error, newsItemId]);
 
     useEffect(() => {
         fetchNewsItem();
     }, [fetchNewsItem]);
 
-    if (!newsData || error || !newsData?.title) return <div>{error}</div>;
+    if (!newsData || error || !newsData?.title) return <Error>{error}</Error>;
 
     return (
         <div className={styles.content}>
-            <div>
+            <div className={styles.title}>
                 {newsData.url ? (
                     <a href={newsData.url} target="_blank" rel="noopener noreferrer">
                         {newsData.title}
@@ -43,9 +44,11 @@ const Article: React.FC<ArticleProps> = ({ newsItemId = '' }) => {
                 )}
             </div>
             <div className={styles.meta}>
-                {newsData.score && <div>Score: {newsData.score}</div>}
-                {newsData.by && <div>By: {newsData.by}</div>}
-                {newsData.time && <div>Time posted: {getTimeDifference(newsData.time)}</div>}
+                {newsData.score && <div className={styles.score}>Score: {newsData.score}</div>}
+                <div className={styles.author}>
+                    Posted{newsData.by && <span> by {newsData.by}</span>}
+                    {newsData.time && <span> {getTimeDifference(newsData.time)}</span>}
+                </div>
             </div>
         </div>
     );
