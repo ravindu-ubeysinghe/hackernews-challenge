@@ -1,6 +1,10 @@
 # HackerNews Challenge SPA
 
-## Created with 
+## Live Preview
+
+On Netlify: https://hackernews-challenge.netlify.app/
+
+## Created With 
 
 - ReactJS
 - Typescript
@@ -9,8 +13,6 @@
 - Jest
 - SASS
 - ESLint and Prettier
-
-
 
 ## Available Scripts
 
