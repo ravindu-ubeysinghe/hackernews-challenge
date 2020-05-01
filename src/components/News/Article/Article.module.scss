@@ -1,0 +1,13 @@
+.content {
+    display: block;
+}
+
+.meta {
+    display: flex;
+    flex-direction: row;
+    
+    div {
+        font-size: small;
+        flex: 1;
+    }
+}
