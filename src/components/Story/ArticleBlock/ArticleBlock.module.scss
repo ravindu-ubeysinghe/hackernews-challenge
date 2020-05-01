@@ -14,8 +14,8 @@
 .title {
     color: var(--black);
     text-decoration: none;
-    font-size: larger;
-    font-weight: bold;
+    font-size: var(--large);
+    font-weight: var(--bold);
 }
 
 .meta {
@@ -23,7 +23,7 @@
     flex-direction: row;
     
     div {
-        font-size: small;
+        font-size: var(--small);
     }
 
     .score {
@@ -35,4 +35,11 @@
         flex: 1;
         margin-left: var(--spacing);
     }
+}
+
+.comments {
+    font-size: var(--x-small);
+    text-transform: uppercase;
+    font-weight: var(--bold);
+    margin-top: var(--spacing);
 }

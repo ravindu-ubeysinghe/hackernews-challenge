@@ -1,0 +1,30 @@
+.content {
+    display: block;
+    padding: var(--spacing) 0;
+    margin: var(--spacing-large);
+    border-bottom: 1px solid var(--black);
+
+    &:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+.text {
+    color: var(--black);
+    text-decoration: none;
+    font-size: var(--small);
+    margin-top: var(--spacing);
+}
+
+.meta {
+    display: flex;
+    flex-direction: row;
+    font-size: var(--small);
+    font-style: italic;
+    font-weight: var(--medium);
+
+    .author {
+        margin-left: 0.25rem;
+    }
+}

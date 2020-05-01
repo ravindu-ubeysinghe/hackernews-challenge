@@ -1,8 +1,8 @@
-type NewsItem = {
-    id: string;
+type StoryItem = {
+    id: number;
     by?: string;
-    descendants?: string;
-    kids?: string[];
+    descendants?: number;
+    kids?: number[];
     score?: number;
     time?: number;
     title?: string;
@@ -10,4 +10,4 @@ type NewsItem = {
     url?: string;
 };
 
-export default NewsItem;
+export default StoryItem;
