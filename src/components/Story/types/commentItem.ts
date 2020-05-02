@@ -6,6 +6,7 @@ type CommentItem = {
     text?: string;
     time?: number;
     type?: string;
+    deleted?: boolean;
 };
 
 export default CommentItem;

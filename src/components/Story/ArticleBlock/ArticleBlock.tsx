@@ -54,7 +54,7 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, index, className =
         fetchStoryItem();
     }, [fetchStoryItem]);
 
-    if (!storyData || !storyId) return null;
+    if (!storyId || !storyData || storyData?.deleted) return null;
 
     if (error || !storyData?.title) return <Error>{error}</Error>;
     return (

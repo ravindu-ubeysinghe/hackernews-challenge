@@ -34,7 +34,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({ commentId }) => {
         fetchStoryItem();
     }, [fetchStoryItem]);
 
-    if (loading || !commentData || !commentId) return null;
+    if (loading || !commentData || !commentId || commentData?.deleted) return null;
 
     if (error || !commentData?.text) return <Error>{error}</Error>;
 

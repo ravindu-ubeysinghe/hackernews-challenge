@@ -8,6 +8,7 @@ type StoryItem = {
     title?: string;
     type?: string;
     url?: string;
+    deleted?: boolean;
 };
 
 export default StoryItem;
