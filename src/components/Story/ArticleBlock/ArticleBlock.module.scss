@@ -16,6 +16,11 @@
     text-decoration: none;
     font-size: var(--large);
     font-weight: var(--bold);
+
+    .originSite {
+        font-size: var(--small);
+        font-weight: var(--regular);
+    }
 }
 
 .meta {
@@ -28,12 +33,12 @@
 
     .score {
         max-width: 100px;
-        margin-right: var(--spacing);
+        // margin-right: var(--spacing);
     }
 
     .author {
         flex: 1;
-        margin-left: var(--spacing);
+        // margin-left: var(--spacing);
     }
 }
 

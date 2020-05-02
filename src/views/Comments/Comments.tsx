@@ -15,8 +15,9 @@ const Comments: React.FC = () => {
     const [commentIds, setCommentIds] = useState<null | number[]>();
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const [articleLoading, setArticleLoading] = useState<boolean>(false);
 
-    const fetchStoryIds = useCallback((): void => {
+    const fetchCommentIds = useCallback((): void => {
         setLoading(true);
         axios
             .get(`${config.API_BASE}/item/${storyId}.json`)
@@ -27,16 +28,21 @@ const Comments: React.FC = () => {
             .finally(() => setLoading(false));
     }, [storyId]);
 
-    const renderComments = useMemo((): React.ReactNode => {
+    const renderComments = useMemo<React.ReactNode>(() => {
         if (!commentIds) return null;
         return commentIds.slice(0, config.MAX_COMMENT_ITEMS).map((commentId) => <CommentBlock key={commentId} commentId={commentId} />);
     }, [commentIds]);
 
-    useEffect(() => {
-        fetchStoryIds();
-    }, [fetchStoryIds]);
+    const renderArticle = useMemo<React.ReactNode>(() => {
+        if (!storyId) return null;
+        return <ArticleBlock storyId={storyId} className={styles.articleBlock} showCommentsButton={false} onLoad={setArticleLoading} />;
+    }, [storyId]);
 
-    if (loading) {
+    useEffect(() => {
+        fetchCommentIds();
+    }, [fetchCommentIds]);
+
+    if (loading || articleLoading) {
         return <Loader />;
     }
 
@@ -48,8 +54,11 @@ const Comments: React.FC = () => {
 
     return (
         <div>
-            <ArticleBlock storyId={storyId} className={styles.articleBlock} showCommentsButton={false} />
-            <div className={styles.title}>Comments</div>
+            {renderArticle}
+            <div className={styles.title}>
+                Top {commentIds.length > config.MAX_COMMENT_ITEMS ? config.MAX_COMMENT_ITEMS : commentIds.length} comments out of{' '}
+                {commentIds.length}
+            </div>
             {renderComments}
         </div>
     );

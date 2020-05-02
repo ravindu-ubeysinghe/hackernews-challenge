@@ -1,4 +1,5 @@
 /* eslint-disable react/no-danger */
+/* This is needed to render HTML content coming through with comments */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
@@ -16,22 +17,24 @@ interface CommentBlockProps {
 const CommentBlock: React.FC<CommentBlockProps> = ({ commentId }) => {
     const [commentData, setCommentData] = useState<null | CommentItem>(null);
     const [error, setError] = useState<null | string>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const fetchStoryItem = useCallback((): void => {
-        if (error) setError(null); // if error exists, clear it before calling the API
+        setLoading(true);
         axios
             .get(`${config.API_BASE}/item/${commentId}.json`)
             .then((res) => {
                 setCommentData(res.data);
             })
-            .catch((err) => setError(err.message));
-    }, [error, commentId]);
+            .catch((err) => setError(err.message))
+            .finally(() => setLoading(false));
+    }, [commentId]);
 
     useEffect(() => {
         fetchStoryItem();
     }, [fetchStoryItem]);
 
-    if (!commentData) return null;
+    if (loading || !commentData || !commentId) return null;
 
     if (error || !commentData?.text) return <Error>{error}</Error>;
 
@@ -39,7 +42,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({ commentId }) => {
         <div className={styles.content}>
             <div className={styles.meta}>
                 Posted {commentData.by && <span className={styles.author}> by {commentData.by}</span>}
-                {commentData.time && <span> {getTimeDifference(commentData.time)}</span>}
+                {commentData.time && <span>&nbsp;{getTimeDifference(commentData.time)}</span>}
             </div>
             <div className={styles.text} dangerouslySetInnerHTML={{ __html: commentData.text }} />
         </div>
