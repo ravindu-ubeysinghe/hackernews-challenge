@@ -32,21 +32,22 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, index, className =
     }, [storyId]);
 
     const renderCommentsButton = useMemo(() => {
-        if (!showCommentsButton || !storyData || !storyData.kids) return null;
+        if (!showCommentsButton || !storyData) return null;
 
-        const CommentsButton = (
+        return (
             <div className={styles.comments}>
-                {storyData.kids.length > 1 ? (
-                    <div>
-                        See top {storyData.kids.length > 20 ? '20' : storyData.kids.length} comments out of {storyData.kids.length}
-                    </div>
+                {storyData.kids && storyData.kids.length > 1 ? (
+                    <Link to={`/comments/${storyId}`}>
+                        <div>
+                            See top {storyData.kids.length > config.MAX_COMMENT_ITEMS ? config.MAX_COMMENT_ITEMS : storyData.kids.length}{' '}
+                            comments out of {storyData.kids.length}
+                        </div>
+                    </Link>
                 ) : (
                     <div>No comments so far</div>
                 )}
             </div>
         );
-
-        return storyData.kids.length > 1 ? <Link to={`/comments/${storyId}`}>{CommentsButton}</Link> : CommentsButton;
     }, [showCommentsButton, storyData, storyId]);
 
     useEffect(() => {

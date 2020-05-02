@@ -16,10 +16,9 @@
         font-weight: var(--mediumBold);
     }
 
-    @media(min-width: 481px) {
+    @media (min-width: 481px) {
         padding-left: var(--spacing-large);
         padding-right: var(--spacing-large);
         justify-content: left;
     }
 }
-
