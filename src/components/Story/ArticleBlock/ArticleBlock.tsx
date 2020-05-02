@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
@@ -16,10 +16,9 @@ interface ArticleBlockProps {
     index?: number;
     showCommentsButton?: boolean;
     className?: string;
-    onLoad?: (isLoading: boolean) => void;
 }
 
-const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, index, className = '', showCommentsButton = true, onLoad = () => {} }) => {
+const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, index, className = '', showCommentsButton = true }) => {
     const [storyData, setStoryData] = useState<null | StoryItem>(null);
     const [error, setError] = useState<null | string>(null);
 
@@ -31,6 +30,24 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, index, className =
             })
             .catch((err) => setError(err.message));
     }, [storyId]);
+
+    const renderCommentsButton = useMemo(() => {
+        if (!showCommentsButton || !storyData || !storyData.kids) return null;
+
+        const CommentsButton = (
+            <div className={styles.comments}>
+                {storyData.kids.length > 1 ? (
+                    <div>
+                        See top {storyData.kids.length > 20 ? '20' : storyData.kids.length} comments out of {storyData.kids.length}
+                    </div>
+                ) : (
+                    <div>No comments so far</div>
+                )}
+            </div>
+        );
+
+        return storyData.kids.length > 1 ? <Link to={`/comments/${storyId}`}>{CommentsButton}</Link> : CommentsButton;
+    }, [showCommentsButton, storyData, storyId]);
 
     useEffect(() => {
         fetchStoryItem();
@@ -61,13 +78,7 @@ const ArticleBlock: React.FC<ArticleBlockProps> = ({ storyId, index, className =
                     {storyData.time && <span>&nbsp;{getTimeDifference(storyData.time)}</span>}
                 </div>
             </div>
-            {showCommentsButton && storyData.kids && storyData.kids.length > 1 && (
-                <Link to={`/comments/${storyId}`}>
-                    <div className={styles.comments}>
-                        See top {storyData.kids.length > 20 ? '20' : storyData.kids.length} comments out of {storyData.kids.length}
-                    </div>
-                </Link>
-            )}
+            {renderCommentsButton}
         </div>
     );
 };

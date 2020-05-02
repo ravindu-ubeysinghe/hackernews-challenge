@@ -15,7 +15,6 @@ const Comments: React.FC = () => {
     const [commentIds, setCommentIds] = useState<null | number[]>();
     const [error, setError] = useState<null | string>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const [articleLoading, setArticleLoading] = useState<boolean>(false);
 
     const fetchCommentIds = useCallback((): void => {
         setLoading(true);
@@ -35,14 +34,14 @@ const Comments: React.FC = () => {
 
     const renderArticle = useMemo<React.ReactNode>(() => {
         if (!storyId) return null;
-        return <ArticleBlock storyId={storyId} className={styles.articleBlock} showCommentsButton={false} onLoad={setArticleLoading} />;
+        return <ArticleBlock storyId={storyId} className={styles.articleBlock} showCommentsButton={false} />;
     }, [storyId]);
 
     useEffect(() => {
         fetchCommentIds();
     }, [fetchCommentIds]);
 
-    if (loading || articleLoading) {
+    if (loading) {
         return <Loader />;
     }
 
