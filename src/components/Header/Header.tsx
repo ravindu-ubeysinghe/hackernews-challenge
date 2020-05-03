@@ -9,7 +9,7 @@ const Header: React.FC = () => (
     <ContentContainer isFullWidth className={styles.wrapper} dataTestId="header">
         <ContentContainer className={styles.content}>
             <Link to="/" data-testid="header-logo">
-                <h4>HackerStory</h4>
+                <h4>HackerNews</h4>
             </Link>
         </ContentContainer>
     </ContentContainer>
